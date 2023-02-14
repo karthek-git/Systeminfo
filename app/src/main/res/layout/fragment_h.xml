@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".HFragment">
+
+	<ListView
+		android:id="@android:id/list"
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:animateLayoutChanges="true"
+		android:background="@drawable/smooth_edge_rect"
+		android:clipToPadding="false"
+		android:divider="@null"
+		android:entries="@array/HList"
+		android:footerDividersEnabled="false"
+		android:layoutAnimation="@anim/anim_layout_controller" />
+
+</FrameLayout>

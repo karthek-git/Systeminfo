@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:tools="http://schemas.android.com/tools"
+	android:layout_width="match_parent"
+	android:layout_height="match_parent"
+	tools:context=".SocFragment">
+
+	<LinearLayout
+		android:layout_width="match_parent"
+		android:layout_height="match_parent"
+		android:orientation="vertical">
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/soc_manufacturer" />
+
+			<TextView
+				android:id="@+id/soc_manufacturer"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/model" />
+
+			<TextView
+				android:id="@+id/soc_model"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/no_cores" />
+
+			<TextView
+				android:id="@+id/cores_no"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/supported_abis" />
+
+			<TextView
+				android:id="@+id/supported_abis"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/supported_32bit_abis" />
+
+			<TextView
+				android:id="@+id/supported_32bit_abis"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/supported_64bit_abis" />
+
+			<TextView
+				android:id="@+id/supported_64bit_abis"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/radio_version" />
+
+			<TextView
+				android:id="@+id/radio_version"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/gpu" />
+
+			<TextView
+				android:id="@+id/gpu"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/isp" />
+
+			<TextView
+				android:id="@+id/isp"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/dsp" />
+
+			<TextView
+				android:id="@+id/dsp"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+		<LinearLayout
+			style="@style/key_value_style"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content">
+
+			<TextView
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:gravity="center_vertical"
+				android:padding="8dp"
+				android:text="@string/no_cores" />
+
+			<TextView
+				android:id="@+id/core"
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:layout_weight="1"
+				android:padding="8dp" />
+		</LinearLayout>
+
+	</LinearLayout>
+</androidx.core.widget.NestedScrollView>

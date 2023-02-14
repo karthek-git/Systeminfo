@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+	<array name="HList">
+		<item>System</item>
+		<item>SOC</item>
+		<item>Cpu</item>
+		<item>Display</item>
+		<item>Network</item>
+		<item>Battery</item>
+		<item>Android</item>
+		<item>Gpu</item>
+		<item>Thermal</item>
+		<item>Sensors</item>
+		<item>Apps</item>
+		<item>Codecs</item>
+		<item>Mounts</item>
+		<item>Drm Info</item>
+	</array>
+</resources>
