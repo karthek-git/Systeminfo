@@ -14,6 +14,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.karthek.android.s.ainfo.databinding.BuildInfoFragmentBinding;
+import com.karthek.android.s.ainfo.state.BuildInfoViewModel;
 
 public class BuildInfoFragment extends Fragment {
 

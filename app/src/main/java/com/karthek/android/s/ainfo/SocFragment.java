@@ -1,5 +1,7 @@
 package com.karthek.android.s.ainfo;
 
+import static com.karthek.android.s.ainfo.SApplication.props;
+
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,8 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import com.karthek.android.s.ainfo.databinding.FragmentSocBinding;
-
-import static com.karthek.android.s.ainfo.IApplication.props;
 
 /**
  * A simple {@link Fragment} subclass.

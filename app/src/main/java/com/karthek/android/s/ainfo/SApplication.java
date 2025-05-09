@@ -4,6 +4,6 @@ import android.app.Application;
 
 import com.karthek.android.s.ainfo.helper.Props;
 
-public class IApplication extends Application {
+public class SApplication extends Application {
 	public static Props props=new Props();
 }
