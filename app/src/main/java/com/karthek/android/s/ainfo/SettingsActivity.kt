@@ -86,7 +86,7 @@ class SettingsActivity : ComponentActivity() {
 					headlineContent = { Text(text = "Privacy Policy") },
 					modifier = Modifier.clickable {
 						val uri =
-							"https://policies.karthek.com/Systeminfo/-/blob/master/privacy.md".toUri()
+							"https://policies.karthek.com/Systeminfo/blob/master/privacy.md".toUri()
 						startActivity(Intent(Intent.ACTION_VIEW, uri))
 					})
 				HorizontalDivider()
