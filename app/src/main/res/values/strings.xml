@@ -1,13 +1,16 @@
 <resources>
 	<string name="app_name">SysX</string>
+	<string name="title_activity_settings">SettingsActivity</string>
+	<string name="title_activity_licenses">LicensesActivity</string>
 
-	<string name="system">System</string>
+	<string name="go_back">Go back</string>
+
+	<string name="build">Android</string>
 	<string name="soc">System on a Chip (SoC)</string>
 	<string name="cpu">Cpu</string>
 	<string name="display">Display</string>
 	<string name="network">Network</string>
 	<string name="battery">Battery</string>
-	<string name="android">Android</string>
 	<string name="gpu">GPU</string>
 	<string name="Thermal">Thermal</string>
 	<string name="Sensors">Sensors</string>
