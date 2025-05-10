@@ -19,16 +19,21 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.Android
+import androidx.compose.material.icons.outlined.BatteryStd
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.DeveloperBoard
 import androidx.compose.material.icons.outlined.Devices
 import androidx.compose.material.icons.outlined.MoreVert
+import androidx.compose.material.icons.outlined.Screenshot
 import androidx.compose.material.icons.outlined.Security
+import androidx.compose.material.icons.outlined.SmartDisplay
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
@@ -39,13 +44,18 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SecondaryTabRow
+import androidx.compose.material3.Tab
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.input.nestedscroll.nestedScroll
@@ -53,6 +63,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
@@ -61,7 +72,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.karthek.android.s.ainfo.R
 import com.karthek.android.s.ainfo.SettingsActivity
+import com.karthek.android.s.ainfo.state.CodecsViewModel
 import com.karthek.android.s.ainfo.state.DRMViewModel
+import com.karthek.android.s.ainfo.state.PowerViewModel
 import com.karthek.android.s.ainfo.state.SOCViewModel
 import com.karthek.android.s.ainfo.state.getDisplayInfo
 import com.karthek.android.s.ainfo.ui.components.ContentLoading
@@ -133,6 +146,16 @@ fun MainScreen() {
 			composable(route = "root/display") {
 				DisplayScreen(paddingValues = paddingValues)
 			}
+			composable(route = "root/power") {
+				val context = LocalContext.current
+				PowerScreen(
+					paddingValues = paddingValues,
+					powerViewModel = PowerViewModel(context.applicationContext)
+				)
+			}
+			composable(route = "root/codecs") {
+				CodecsScreen(paddingValues = paddingValues)
+			}
 		}
 	}
 }
@@ -163,9 +186,18 @@ fun MainScreenContent(navController: NavController, paddingValues: PaddingValues
 			HorizontalDivider()
 			MainListItem(
 				text = stringResource(R.string.display),
-				icon = Icons.Outlined.DeveloperBoard
+				icon = Icons.Outlined.Screenshot
 			) { navController.navigate("root/display") }
-
+			HorizontalDivider()
+			MainListItem(
+				text = stringResource(R.string.Codecs),
+				icon = Icons.Outlined.SmartDisplay
+			) { navController.navigate("root/codecs") }
+			HorizontalDivider()
+			MainListItem(
+				text = stringResource(R.string.battery),
+				icon = Icons.Outlined.BatteryStd
+			) { navController.navigate("root/power") }
 		}
 	}
 }
@@ -327,5 +359,62 @@ fun DisplayScreen(paddingValues: PaddingValues) {
 		InfoListItem("Display Density", "${configuration.densityDpi} dpi")
 		InfoListItem("Supported Refresh Rates", displayInfo.supportedRefreshRates)
 		InfoListItem("HDR Capabilities", displayInfo.hdrCaps)
+		InfoListItem("Wide Color Gamut", displayInfo.wideColorGamut)
+	}
+}
+
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun CodecsScreen(paddingValues: PaddingValues, codecsViewModel: CodecsViewModel = viewModel()) {
+	if (codecsViewModel.loading) {
+		ContentLoading(modifier = Modifier.padding(paddingValues))
+	} else {
+		var state by remember { mutableIntStateOf(0) }
+		val titles = listOf("Decoders", "Encoders")
+		Column(modifier = Modifier.padding(paddingValues)) {
+			SecondaryTabRow(selectedTabIndex = state) {
+				titles.forEachIndexed { index, title ->
+					Tab(
+						selected = state == index,
+						onClick = { state = index },
+						text = {
+							Text(
+								text = title,
+								maxLines = 2,
+								overflow = TextOverflow.Ellipsis
+							)
+						}
+					)
+				}
+			}
+			if (state == 0) {
+				LazyColumn {
+					items(codecsViewModel.decoderCodecInfoList) {
+						InfoListItem(it.name, it.isHardwareAccelerated)
+					}
+				}
+			} else {
+				LazyColumn {
+					items(codecsViewModel.encoderCodecInfoList) {
+						InfoListItem(it.name, it.isHardwareAccelerated)
+					}
+				}
+			}
+		}
+	}
+}
+
+@Composable
+fun PowerScreen(paddingValues: PaddingValues, powerViewModel: PowerViewModel) {
+	ListComponent(modifier = Modifier.padding(paddingValues)) {
+		if (powerViewModel.loading) {
+			ContentLoading()
+		} else {
+			InfoListItem("Status", powerViewModel.batteryInfo.status)
+			InfoListItem("Level", powerViewModel.batteryInfo.percentage)
+			InfoListItem("Total Capacity", powerViewModel.batteryInfo.totalCapacitymAh)
+			//InfoListItem("Current Capacity", powerViewModel.batteryInfo.currentCapacitymAh)
+			InfoListItem("Health", powerViewModel.batteryInfo.health)
+		}
 	}
 }

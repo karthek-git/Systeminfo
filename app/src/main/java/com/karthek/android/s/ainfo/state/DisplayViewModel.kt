@@ -28,7 +28,7 @@ val hdrMap = mapOf(
 )
 
 fun getDisplayInfo(context: Context): DisplayInfo {
-	val display = getPhysicalDisplaySize(context) ?: return DisplayInfo("", "", "")
+	val display = getPhysicalDisplaySize(context) ?: return DisplayInfo("", "", "","")
 	val size = Point()
 	@Suppress("DEPRECATION")
 	display.getRealSize(size)
@@ -41,7 +41,12 @@ fun getDisplayInfo(context: Context): DisplayInfo {
 				if (isEmpty()) "None" else this
 			}
 	}
-	return DisplayInfo(resolution, supportedRefreshRates, hdrCaps)
+	val wideColorGamut = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+		display.isWideColorGamut.toString()
+	} else {
+		"NA"
+	}
+	return DisplayInfo(resolution, supportedRefreshRates, hdrCaps, wideColorGamut)
 }
 
 fun getPhysicalDisplaySize(context: Context): Display? {
@@ -61,5 +66,6 @@ data class DisplayInfo(
 	val resolution: String,
 	val supportedRefreshRates: String,
 	val hdrCaps: String,
+	val wideColorGamut: String,
 )
 
