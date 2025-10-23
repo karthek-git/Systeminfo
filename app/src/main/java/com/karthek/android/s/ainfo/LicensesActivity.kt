@@ -5,9 +5,11 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.LocalIndication
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.consumeWindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -25,6 +27,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
@@ -38,6 +41,7 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.karthek.android.s.ainfo.ui.theme.AppTheme
+import com.karthek.android.s.helper.ui.components.ScaleIndication
 import com.mikepenz.aboutlibraries.Libs
 import com.mikepenz.aboutlibraries.entity.Library
 import com.mikepenz.aboutlibraries.entity.License
@@ -68,7 +72,9 @@ class LicensesActivity : ComponentActivity() {
 	fun ScreenContent() {
 		AppTheme {
 			Surface(color = MaterialTheme.colorScheme.background) {
-				LicensesContent()
+				CompositionLocalProvider(LocalIndication provides ScaleIndication) {
+					LicensesContent()
+				}
 			}
 		}
 	}
@@ -101,13 +107,18 @@ class LicensesActivity : ComponentActivity() {
 		state: LazyListState, paddingValues: PaddingValues, callback: (License) -> Unit,
 	) {
 		if (libs != null) {
-			LazyColumn(state = state, contentPadding = paddingValues) {
+			LazyColumn(
+				state = state,
+				contentPadding = paddingValues,
+				modifier = Modifier.consumeWindowInsets(paddingValues)
+			) {
 				items(libs!!) {
-					Column(modifier = Modifier
-						.clickable {
-							callback(it.licenses.first())
-						}
-						.padding(start = 16.dp)) {
+					Column(
+						modifier = Modifier
+							.clickable {
+								callback(it.licenses.first())
+							}
+							.padding(start = 16.dp)) {
 						Text(
 							text = it.name, modifier = Modifier
 								.fillMaxWidth()

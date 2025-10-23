@@ -40,6 +40,7 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LargeTopAppBar
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.MaterialTheme
@@ -83,10 +84,10 @@ import java.util.Date
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainScreen() {
-	val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+	val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 	Scaffold(
 		topBar = {
-			TopAppBar(
+			LargeTopAppBar(
 				title = { Text(text = stringResource(id = R.string.app_name)) },
 				actions = {
 					val context = LocalContext.current
@@ -156,6 +157,9 @@ fun MainScreen() {
 			composable(route = "root/codecs") {
 				CodecsScreen(paddingValues = paddingValues)
 			}
+			composable(route = "root/c") {
+				CodecsScreen(paddingValues = paddingValues)
+			}
 		}
 	}
 }
@@ -210,7 +214,7 @@ fun ListComponent(modifier: Modifier = Modifier, content: @Composable ColumnScop
 @Composable
 fun CardComponent(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -> Unit) {
 	Card(
-		shape = RoundedCornerShape(8.dp),
+		shape = RoundedCornerShape(16.dp),
 		colors = CardDefaults.cardColors(
 			containerColor = MaterialTheme.colorScheme.surfaceColorAtElevation(4.dp) // todo(temp fix for compose m3 car elevation color issue)
 		),
